@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>デジタルワークスペース提案書 | 植木博士氏</title>
+  <style>
+    /* ===== リセット ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, "Helvetica Neue", "Hiragino Sans", sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* ===== ヘッダー ===== */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: #1a2d4f;
+      padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    header .title { color: white; font-size: 13px; font-weight: 700; }
+    header .badge {
+      background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8);
+      font-size: 10px; padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* ===== メインコンテナ ===== */
+    main { padding-bottom: 80px; }
+
+    /* ===== カバー ===== */
+    .cover {
+      background: linear-gradient(160deg, #1a2d4f 0%, #2e5090 60%, #3a7bd5 100%);
+      padding: 52px 24px 44px; text-align: center; color: white;
+    }
+    .cover .eyebrow {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 16px;
+    }
+    .cover h1 { font-size: 24px; font-weight: 800; line-height: 1.3; margin-bottom: 10px; }
+    .cover .subtitle { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 32px; }
+    .cover-meta {
+      display: flex; background: rgba(255,255,255,0.1);
+      border-radius: 12px; overflow: hidden;
+    }
+    .cover-meta-item {
+      flex: 1; padding: 12px 8px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .cover-meta-item:last-child { border-right: none; }
+    .cover-meta-item .label { font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+    .cover-meta-item .value { font-size: 12px; font-weight: 700; }
+
+    /* ===== セクション共通 ===== */
+    .section { padding: 28px 20px; }
+    .section + .section { padding-top: 0; }
+    .divider { height: 8px; background: #f0f2f5; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    }
+    .section-num {
+      background: #1a2d4f; color: white; font-size: 10px; font-weight: 700;
+      min-width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .section-title { font-size: 18px; font-weight: 800; color: #1a2d4f; }
+
+    /* ===== カード ===== */
+    .card {
+      background: white; border-radius: 14px; padding: 18px;
+      margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .card-title {
+      font-size: 13px; font-weight: 700; color: #1a2d4f;
+      margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+    }
+    .card-body { font-size: 13px; color: #555; line-height: 1.6; }
+
+    /* ===== ハイライトボックス ===== */
+    .highlight {
+      background: #e8f0fe; border-left: 3px solid #1a2d4f;
+      border-radius: 0 10px 10px 0; padding: 14px; font-size: 13px;
+      color: #1a2d4f; margin-bottom: 10px; line-height: 1.6;
+    }
+    .highlight strong { color: #2e5090; }
+
+    /* ===== 警告ボックス ===== */
+    .warning-box {
+      background: #fff3f0; border: 1px solid #ffd0c8;
+      border-radius: 12px; padding: 14px; margin-bottom: 10px;
+    }
+    .warning-box .warn-title {
+      font-size: 12px; font-weight: 700; color: #c0392b; margin-bottom: 6px;
+    }
+    .warning-box ul { font-size: 13px; color: #666; padding-left: 18px; }
+    .warning-box li { margin-bottom: 4px; }
+
+    /* ===== シナリオグリッド ===== */
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .scenario-card {
+      background: white; border-radius: 12px; padding: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .scenario-card .icon { font-size: 20px; margin-bottom: 5px; }
+    .scenario-card h3 { font-size: 12px; font-weight: 700; color: #1a2d4f; margin-bottom: 3px; }
+    .scenario-card p { font-size: 11px; color: #666; line-height: 1.5; }
+
+    /* ===== 星取表 ===== */
+    .star-table { width: 100%; border-collapse: collapse; background: white;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06); font-size: 12px; }
+    .star-table thead tr { background: #1a2d4f; color: white; }
+    .star-table th { padding: 10px 8px; text-align: center; font-size: 11px; font-weight: 700; }
+    .star-table th:first-child { text-align: left; padding-left: 12px; }
+    .star-table td { padding: 9px 8px; border-bottom: 1px solid #f0f0f0; text-align: center; }
+    .star-table td:first-child { text-align: left; padding-left: 12px; color: #333; font-weight: 600; font-size: 12px; }
+    .star-table tr:last-child td { border-bottom: none; }
+    .star-table .rec-row td { background: #e8f0fe !important; font-weight: 700; }
+    .star-table .highlight-col { background: #f0f4ff; }
+    /* 現状列（グレーアウト） */
+    .star-table .dim { color: #aaa; }
+    .stars { display: flex; gap: 2px; justify-content: center; align-items: center; }
+    .star-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #1a2d4f; display: inline-block; flex-shrink: 0;
+    }
+    .star-dot.empty {
+      background: transparent; border: 1.5px solid #ccc;
+    }
+    .star-dot.dim-dot { background: #ccc; }
+
+    /* ===== デバイスリスト ===== */
+    .device-list { display: flex; flex-direction: column; gap: 10px; }
+    .device-item {
+      background: white; border-radius: 12px; padding: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .device-icon { font-size: 22px; width: 36px; text-align: center; flex-shrink: 0; }
+    .device-name { font-size: 13px; font-weight: 700; color: #1a2d4f; margin-bottom: 2px; }
+    .device-model { font-size: 11px; color: #2e5090; font-weight: 600; margin-bottom: 4px; }
+    .device-reason { font-size: 12px; color: #666; }
+    .badge-rec {
+      display: inline-block; background: #1a2d4f; color: white;
+      font-size: 9px; font-weight: 700; padding: 2px 7px;
+      border-radius: 20px; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* ===== 3社比較テーブル ===== */
+    .compare-table {
+      width: 100%; border-collapse: collapse; background: white;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      font-size: 12px;
+    }
+    .compare-table thead tr { background: #1a2d4f; color: white; }
+    .compare-table th { padding: 10px 6px; text-align: center; font-size: 11px; font-weight: 700; line-height: 1.4; }
+    .compare-table th:first-child { text-align: left; padding-left: 12px; width: 35%; }
+    .compare-table td { padding: 9px 6px; border-bottom: 1px solid #f0f0f0; text-align: center; }
+    .compare-table td:first-child { text-align: left; padding-left: 12px; color: #444; font-weight: 600; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .rec-row td { background: #e8f0fe !important; font-weight: 700; }
+    /* スコア文字スタイル */
+    .s-great { color: #1565c0; font-weight: 700; font-size: 15px; }
+    .s-good  { color: #2196f3; font-weight: 600; font-size: 14px; }
+    .s-fair  { color: #f57c00; font-weight: 600; font-size: 14px; }
+    .s-none  { color: #e53935; font-weight: 600; font-size: 13px; }
+    /* 推奨列ハイライト */
+    .col-rec { background: #f0f4ff; }
+    /* Notion列（サブ扱い）*/
+    .col-sub { background: #fafafa; }
+
+    /* ===== サービス詳細カード ===== */
+    .service-detail {
+      background: white; border-radius: 14px; padding: 18px;
+      margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .service-detail .svc-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .svc-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; flex-shrink: 0;
+    }
+    .svc-badge.ms { background: #e3f2fd; color: #1565c0; }
+    .svc-badge.gws { background: #e8f5e9; color: #2e7d32; }
+    .svc-badge.notion { background: #f3e5f5; color: #6a1b9a; }
+    .svc-badge.rec { background: #1a2d4f; color: white; }
+    .service-detail h3 { font-size: 15px; font-weight: 700; color: #1a2d4f; }
+    .service-detail .price { font-size: 12px; color: #666; margin-bottom: 10px; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pros, .cons {
+      border-radius: 8px; padding: 10px;
+    }
+    .pros { background: #f0f8ff; }
+    .cons { background: #fff9f0; }
+    .pros h4 { font-size: 11px; font-weight: 700; color: #1565c0; margin-bottom: 6px; }
+    .cons h4 { font-size: 11px; font-weight: 700; color: #e65100; margin-bottom: 6px; }
+    .pros li, .cons li {
+      font-size: 11px; color: #555; list-style: none;
+      padding-left: 14px; position: relative; margin-bottom: 3px;
+    }
+    .pros li::before { content: "✓"; position: absolute; left: 0; color: #1565c0; }
+    .cons li::before { content: "!"; position: absolute; left: 0; color: #e65100; font-weight: 700; }
+
+    /* ===== 推奨バナー ===== */
+    .rec-banner {
+      border-radius: 14px; padding: 22px 18px; color: white; margin-bottom: 12px;
+    }
+    .rec-banner.primary { background: linear-gradient(135deg, #1a2d4f, #2e5090); }
+    .rec-banner.secondary { background: #f8f9fa; color: #1a2d4f; border: 2px solid #d0d8e8; }
+    .rec-banner .rec-label { font-size: 10px; letter-spacing: 0.1em; opacity: 0.7; text-transform: uppercase; margin-bottom: 6px; }
+    .rec-banner h3 { font-size: 17px; font-weight: 800; margin-bottom: 14px; }
+    .rec-banner .rec-reasons { list-style: none; font-size: 13px; }
+    .rec-banner .rec-reasons li {
+      padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.15);
+      display: flex; gap: 10px;
+    }
+    .rec-banner.secondary .rec-reasons li { border-bottom-color: #e0e8f0; }
+    .rec-banner .rec-reasons li:last-child { border-bottom: none; }
+    .rec-banner .check { color: #7ec8e3; flex-shrink: 0; }
+    .rec-banner.secondary .check { color: #2e5090; }
+
+    /* ===== ロードマップ ===== */
+    .roadmap { display: flex; flex-direction: column; gap: 0; }
+    .roadmap-item {
+      display: flex; gap: 14px;
+    }
+    .roadmap-line {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; width: 32px;
+    }
+    .roadmap-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #1a2d4f; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .roadmap-connector {
+      width: 2px; background: #d0d8e8; flex: 1; margin: 2px 0;
+      min-height: 20px;
+    }
+    .roadmap-content {
+      background: white; border-radius: 12px; padding: 14px;
+      margin-bottom: 10px; flex: 1;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .roadmap-phase { font-size: 10px; color: #2e5090; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .roadmap-content h3 { font-size: 14px; font-weight: 700; color: #1a2d4f; margin-bottom: 8px; }
+    .roadmap-content ul { font-size: 12px; color: #555; padding-left: 18px; }
+    .roadmap-content li { margin-bottom: 4px; }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      background: white; border-radius: 12px;
+      margin-bottom: 10px; overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .faq-q {
+      padding: 14px; font-size: 13px; font-weight: 700; color: #1a2d4f;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .faq-q-mark {
+      background: #1a2d4f; color: white; width: 20px; height: 20px;
+      border-radius: 50%; font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .faq-a {
+      padding: 0 14px 14px 44px; font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    /* ===== まとめ ===== */
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .summary-card {
+      background: white; border-radius: 12px; padding: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06); text-align: center;
+    }
+    .summary-card .s-icon { font-size: 24px; margin-bottom: 6px; }
+    .summary-card .s-title { font-size: 12px; font-weight: 700; color: #1a2d4f; margin-bottom: 4px; }
+    .summary-card .s-value { font-size: 11px; color: #2e5090; font-weight: 600; }
+
+    /* ===== フッター ===== */
+    footer {
+      background: #1a2d4f; color: rgba(255,255,255,0.5);
+      text-align: center; padding: 28px 20px;
+      font-size: 11px; line-height: 1.7;
+    }
+
+    /* ===== ユーティリティ ===== */
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+    }
+    .tag-blue { background: #e3f2fd; color: #1565c0; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; }
+    .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+    .tag-red { background: #fff3f0; color: #c0392b; }
+
+    .note-box {
+      background: #fff8e1; border-left: 3px solid #f57c00;
+      border-radius: 0 8px 8px 0; padding: 12px; margin-top: 10px;
+      font-size: 12px; color: #555; line-height: 1.6;
+    }
+    .note-box strong { color: #e65100; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="title">デジタルワークスペース提案書</span>
+  <span class="badge">植木博士 様</span>
+</header>
+
+<main>
+
+<!-- ① カバー -->
+<div class="cover">
+  <p class="eyebrow">Confidential — For Hiroshi Ueki</p>
+  <h1>デジタルワークスペース<br>選定・導入提案書</h1>
+  <p class="subtitle">フリーランス移行後の最適な<br>業務環境を整えるために</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <p class="label">宛先</p>
+      <p class="value">植木 博士 様</p>
+    </div>
+    <div class="cover-meta-item">
+      <p class="label">作成日</p>
+      <p class="value">2026年3月</p>
+    </div>
+    <div class="cover-meta-item">
+      <p class="label">版</p>
+      <p class="value">Draft 1.0</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ② はじめに -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">はじめに</div>
+  </div>
+
+  <div class="highlight">
+    Goldman Sachs の会社インフラから離れ、<strong>複数クライアントと並行してアドバイザリー業務を行う</strong>ためには、自前のデジタル環境が不可欠です。
+  </div>
+
+  <div class="card">
+    <p class="card-title">🕐 なぜ今整えるべきか</p>
+    <ul style="padding-left:18px; font-size:13px; color:#555;">
+      <li style="margin-bottom:6px">退職後にアドレスが使えなくなる前に移行しておく</li>
+      <li style="margin-bottom:6px">独自ドメインの取得・設定には数日かかる</li>
+      <li>後から環境を変えると連絡先への再通知コストが高い</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p class="card-title">📋 本資料の構成</p>
+    <p class="card-body">デバイス選定（iPad買い替え）とデジタルワークスペース（Microsoft 365 / Google Workspace / Notion）の3社比較を行い、植木博士氏の業務スタイルに最適な構成を提案します。</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ③ 業務シナリオ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">業務シナリオ整理</div>
+  </div>
+
+  <div class="scenario-grid">
+    <div class="scenario-card">
+      <div class="icon">🤝</div>
+      <h3>アドバイザリー</h3>
+      <p>複数社と並行契約。短い提言・メモが主な成果物。</p>
+    </div>
+    <div class="scenario-card">
+      <div class="icon">📊</div>
+      <h3>スライド作成</h3>
+      <p>PowerPoint形式を稀に作成。受け取りも同形式。</p>
+    </div>
+    <div class="scenario-card">
+      <div class="icon">🎥</div>
+      <h3>ビデオ会議</h3>
+      <p>毎日あり。Teams/Zoom。品質こだわりは低め。</p>
+    </div>
+    <div class="scenario-card">
+      <div class="icon">🗺️</div>
+      <h3>移動中心</h3>
+      <p>クライアント先・永田町。在宅なし。軽さ最優先。</p>
+    </div>
+    <div class="scenario-card">
+      <div class="icon">🔐</div>
+      <h3>VPN要件</h3>
+      <p>クライアント支給VPNの可能性あり。</p>
+    </div>
+    <div class="scenario-card">
+      <div class="icon">📧</div>
+      <h3>独自ドメイン</h3>
+      <p>プロフェッショナルな印象のため必須。</p>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:12px">
+    前職は <strong>Windows / MS Office / Teams / Zoom</strong> を使用。<br>
+    入力量は少なめ（短いメール・LINE 中心）。予算は青天井。
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ④ デバイス比較 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">デバイス比較</div>
+  </div>
+
+  <!-- ── Part 1: PC vs iPad ── -->
+  <p style="font-size:12px;font-weight:700;color:#2e5090;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">
+    Step 1 — PC vs iPad：どちらを選ぶか？
+  </p>
+
+  <p style="font-size:13px;color:#555;line-height:1.7;margin-bottom:12px;">
+    「MacBook Air（PC）にすべきでは？」という疑問に先に答えます。<strong>移動中心・軽量重視</strong>の業務スタイルでは、<strong>iPad が一歩優位</strong>です。
+  </p>
+
+  <!-- PC vs iPad 比較表 -->
+  <div style="overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:12px;">
+    <table class="compare-table" style="min-width:300px;">
+      <thead>
+        <tr>
+          <th>評価軸</th>
+          <th>MacBook Air<br><span style="font-weight:400;font-size:9px">（PC代表）</span></th>
+          <th style="background:#2e5090;">iPad Air 11"<br><span style="font-weight:400;font-size:9px">★推奨</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>本体重量</td>
+          <td style="font-size:12px;color:#888;">1.24 kg</td>
+          <td class="col-rec" style="font-size:12px;font-weight:700;color:#1a2d4f;">462 g<br><span style="font-weight:400;font-size:10px;color:#2e5090;">約760g軽い</span></td>
+        </tr>
+        <tr>
+          <td>開いてすぐ使える</td>
+          <td><span class="s-good">○</span></td>
+          <td class="col-rec"><span class="s-great">◎</span><br><span style="font-size:10px;color:#2e5090;">即起動</span></td>
+        </tr>
+        <tr>
+          <td>タッチ操作・手書き</td>
+          <td><span class="s-none">✕</span></td>
+          <td class="col-rec"><span class="s-great">◎</span><br><span style="font-size:10px;color:#2e5090;">Apple Pencil対応</span></td>
+        </tr>
+        <tr>
+          <td>外出・移動での利便性</td>
+          <td><span class="s-good">○</span></td>
+          <td class="col-rec"><span class="s-great">◎</span><br><span style="font-size:10px;color:#2e5090;">バッグを選ばない</span></td>
+        </tr>
+        <tr>
+          <td>ビデオ会議</td>
+          <td><span class="s-great">◎</span></td>
+          <td class="col-rec"><span class="s-great">◎</span></td>
+        </tr>
+        <tr>
+          <td>PowerPoint作成</td>
+          <td><span class="s-great">◎</span><br><span style="font-size:10px;color:#999">ネイティブ操作</span></td>
+          <td class="col-rec"><span class="s-good">○</span><br><span style="font-size:10px;color:#555">アプリ/Slidesで対応可</span></td>
+        </tr>
+        <tr>
+          <td>バッテリー持ち</td>
+          <td style="font-size:12px;color:#555;">約18時間</td>
+          <td class="col-rec" style="font-size:12px;color:#555;">約10時間</td>
+        </tr>
+        <tr class="rec-row">
+          <td>移動中心スタイル適合</td>
+          <td style="font-size:12px;color:#666;">普通</td>
+          <td class="col-rec" style="font-weight:700;color:#1a2d4f;">◎ 最適</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight" style="margin-bottom:16px;">
+    <strong>結論</strong>：PCはPowerPoint作成でわずかに有利ですが、植木様の業務（短いメモ・会議中心・毎日移動）では、軽さと即応性を持つ <strong>iPad が実用上の優位</strong>を持ちます。iPad Air 11インチはMagic Keyboardと組み合わせることで、PPT作成も問題なく対応できます。
+  </div>
+
+  <!-- ── Part 2: iPad 機種選定 ── -->
+  <p style="font-size:12px;font-weight:700;color:#2e5090;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">
+    Step 2 — iPad 機種選定：mini / Air / Pro
+  </p>
+
+  <div class="warning-box">
+    <p class="warn-title">⚠️ 現在の iPad mini の課題</p>
+    <ul>
+      <li>画面が小さく、入力・資料閲覧がしにくい</li>
+      <li>バッテリー持続時間が業務に不足する</li>
+    </ul>
+  </div>
+
+  <!-- 星取表（機種比較） -->
+  <div style="overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:12px;">
+    <table class="star-table" style="min-width:320px;">
+      <thead>
+        <tr>
+          <th>評価軸</th>
+          <th class="dim">iPad mini<br><span style="font-weight:400;opacity:0.7">（現在）</span></th>
+          <th style="background:#2e5090;">iPad Air 11"<br><span style="font-weight:400;font-size:9px">★推奨</span></th>
+          <th>iPad Pro 11"<br><span style="font-weight:400;font-size:9px">（選択肢）</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>画面の見やすさ</td>
+          <td class="dim">
+            <div class="stars">
+              <span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span>
+              <span class="star-dot empty"></span><span class="star-dot empty"></span><span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td class="highlight-col">
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+              <span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td>
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>文字入力のしやすさ</td>
+          <td class="dim">
+            <div class="stars">
+              <span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span>
+              <span class="star-dot empty"></span><span class="star-dot empty"></span><span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td class="highlight-col">
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+            </div>
+          </td>
+          <td>
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>バッテリー持ち</td>
+          <td class="dim">
+            <div class="stars">
+              <span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span>
+              <span class="star-dot empty"></span><span class="star-dot empty"></span><span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td class="highlight-col">
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+              <span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td>
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>持ち運びやすさ</td>
+          <td class="dim">
+            <div class="stars">
+              <span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span>
+            </div>
+          </td>
+          <td class="highlight-col">
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+              <span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td>
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+              <span class="star-dot empty"></span><span class="star-dot empty"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Apple Pencil 対応</td>
+          <td class="dim">
+            <div class="stars">
+              <span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span>
+              <span class="star-dot empty"></span><span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td class="highlight-col">
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+            </div>
+          </td>
+          <td>
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>コストパフォーマンス</td>
+          <td class="dim">
+            <div class="stars">
+              <span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span><span class="star-dot dim-dot"></span>
+            </div>
+          </td>
+          <td class="highlight-col">
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span>
+              <span class="star-dot empty"></span>
+            </div>
+          </td>
+          <td>
+            <div class="stars">
+              <span class="star-dot"></span><span class="star-dot"></span>
+              <span class="star-dot empty"></span><span class="star-dot empty"></span><span class="star-dot empty"></span>
+            </div>
+          </td>
+        </tr>
+        <tr class="rec-row">
+          <td>総合（業務適合性）</td>
+          <td class="dim" style="font-size:11px;color:#999">課題あり</td>
+          <td class="highlight-col" style="font-weight:700;color:#1a2d4f">★ 推奨</td>
+          <td style="font-size:12px;color:#555">予算次第</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    <strong>iPad mini の良い点</strong>：持ち運びやすさは最高ですが、入力・バッテリー・画面サイズのトレードオフが業務では致命的です。iPad Air 11インチは軽さを保ちながら課題をすべて解消します。
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑤ 推奨デバイス構成 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">推奨デバイス構成</div>
+  </div>
+
+  <div class="device-list">
+    <div class="device-item">
+      <div class="device-icon">📱</div>
+      <div>
+        <p class="device-name">タブレット<span class="badge-rec">推奨</span></p>
+        <p class="device-model">iPad Air 11インチ（M2）/ 128GB Wi-Fi</p>
+        <p class="device-reason">軽量（462g）・大画面・バッテリー大幅改善。業務用途で性能は十分。参考価格：¥98,800〜</p>
+      </div>
+    </div>
+    <div class="device-item">
+      <div class="device-icon">⌨️</div>
+      <div>
+        <p class="device-name">キーボード</p>
+        <p class="device-model">Magic Keyboard for iPad Air</p>
+        <p class="device-reason">稀なPPT作成・長文入力に対応。トラックパッド内蔵でマウス不要。参考価格：¥42,800</p>
+      </div>
+    </div>
+    <div class="device-item">
+      <div class="device-icon">✏️</div>
+      <div>
+        <p class="device-name">スタイラスペン</p>
+        <p class="device-model">Apple Pencil Pro</p>
+        <p class="device-reason">資料への手書き注釈・会議メモに対応。参考価格：¥14,800</p>
+      </div>
+    </div>
+    <div class="device-item">
+      <div class="device-icon">📶</div>
+      <div>
+        <p class="device-name">モバイル接続</p>
+        <p class="device-model">iPhone テザリング（Wi-Fi モデルで充足）</p>
+        <p class="device-reason">SIM内蔵モデル不要で¥20,000節約。クライアント先Wi-Fi＋iPhoneテザリングで充足。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <p class="card-title">💡 iPad Pro（M4）を選ぶ場合</p>
+    <p class="card-body">より高いディスプレイ品質・長期使用を優先する場合はiPad Pro 11インチ（M4）も選択肢。ただし業務用途ではAirで十分です。</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑥ ワークスペース 3社比較 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">ワークスペース 3社比較</div>
+  </div>
+
+  <p style="font-size:13px;color:#555;margin-bottom:14px;line-height:1.6;">
+    独自ドメインメール・ビデオ会議・クラウドドキュメントを中心に、<strong>Microsoft 365</strong>・<strong>Google Workspace</strong>・<strong>Notion</strong> の3サービスを比較します。
+  </p>
+
+  <div style="overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:12px;">
+    <table class="compare-table" style="min-width:340px;">
+      <thead>
+        <tr>
+          <th>評価軸</th>
+          <th>Microsoft<br>365</th>
+          <th style="background:#2e5090;">Google<br>Workspace</th>
+          <th>Notion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>独自ドメインメール</td>
+          <td><span class="s-great">◎</span></td>
+          <td class="col-rec"><span class="s-great">◎</span></td>
+          <td class="col-sub"><span class="s-none">✕</span></td>
+        </tr>
+        <tr>
+          <td>ビデオ会議</td>
+          <td><span class="s-good">○</span><br><span style="font-size:10px;color:#999">Teams</span></td>
+          <td class="col-rec"><span class="s-great">◎</span><br><span style="font-size:10px;color:#2e7d32">Meet</span></td>
+          <td class="col-sub"><span class="s-none">✕</span></td>
+        </tr>
+        <tr>
+          <td>PowerPoint作成</td>
+          <td><span class="s-great">◎</span><br><span style="font-size:10px;color:#999">ネイティブ</span></td>
+          <td class="col-rec"><span class="s-good">○</span><br><span style="font-size:10px;color:#555">Slides→変換</span></td>
+          <td class="col-sub"><span class="s-none">✕</span></td>
+        </tr>
+        <tr>
+          <td>クライアント互換性</td>
+          <td><span class="s-great">◎</span></td>
+          <td class="col-rec"><span class="s-great">◎</span></td>
+          <td class="col-sub"><span class="s-fair">△</span></td>
+        </tr>
+        <tr>
+          <td>iPad 操作性</td>
+          <td><span class="s-good">○</span></td>
+          <td class="col-rec"><span class="s-great">◎</span><br><span style="font-size:10px;color:#2e7d32">ブラウザ完結</span></td>
+          <td class="col-sub"><span class="s-great">◎</span><br><span style="font-size:10px;color:#999">専用アプリ</span></td>
+        </tr>
+        <tr>
+          <td>ドキュメント管理</td>
+          <td><span class="s-good">○</span></td>
+          <td class="col-rec"><span class="s-good">○</span></td>
+          <td class="col-sub"><span class="s-great">◎</span><br><span style="font-size:10px;color:#6a1b9a">知識管理に最強</span></td>
+        </tr>
+        <tr>
+          <td>クライアントVPN(iOS)</td>
+          <td><span class="s-fair">△</span><br><span style="font-size:10px;color:#999">要確認</span></td>
+          <td class="col-rec"><span class="s-fair">△</span><br><span style="font-size:10px;color:#999">要確認</span></td>
+          <td class="col-sub"><span style="font-size:12px;color:#999">—</span></td>
+        </tr>
+        <tr>
+          <td>月額費用</td>
+          <td style="font-size:12px;">¥750〜</td>
+          <td class="col-rec" style="font-size:12px;font-weight:700;color:#1a2d4f">¥680〜</td>
+          <td class="col-sub" style="font-size:12px;">無料〜<br>¥2,400/月</td>
+        </tr>
+        <tr>
+          <td>単独でのフリーランス利用</td>
+          <td><span class="s-great">◎</span></td>
+          <td class="col-rec"><span class="s-great">◎</span></td>
+          <td class="col-sub"><span class="s-none">✕</span><br><span style="font-size:10px;color:#999">メール不可</span></td>
+        </tr>
+        <tr class="rec-row">
+          <td>総合評価</td>
+          <td style="font-size:13px;font-weight:700;color:#1a2d4f">◎</td>
+          <td class="col-rec" style="font-size:13px;font-weight:700;color:#1a2d4f">◎ 推奨</td>
+          <td class="col-sub" style="font-size:12px;color:#666">補完利用</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    <strong>Notion について</strong>：メールホスティング機能がなく、単独ではフリーランスのワークスペースとして不完全です。Google Workspace などと組み合わせて「クライアント管理・プロジェクトメモ」ツールとして活用するのが最適です。
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑦ 各サービス詳細 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">各サービスの特徴</div>
+  </div>
+
+  <!-- Google Workspace -->
+  <div class="service-detail">
+    <div class="svc-header">
+      <span class="svc-badge gws">Google Workspace</span>
+      <span class="svc-badge rec">推奨</span>
+    </div>
+    <h3>Google Workspace Business Starter</h3>
+    <p class="price">¥680/月（税別）・年払い ¥8,160/年 ・独自ドメインメール含む</p>
+    <table class="star-table" style="width:100%; margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="text-align:left; width:38%;">評価軸</th>
+          <th style="width:34%;">評価</th>
+          <th style="text-align:left; font-size:10px; font-weight:400; color:rgba(255,255,255,0.8); width:28%;">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>iPad/iPhone操作性</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#2e7d32; padding-right:6px;">ブラウザ完結</td>
+        </tr>
+        <tr>
+          <td>ビデオ会議</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#666; padding-right:6px;">Meet, URL共有だけ</td>
+        </tr>
+        <tr>
+          <td>メール</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#666; padding-right:6px;">Gmail+独自ドメイン</td>
+        </tr>
+        <tr>
+          <td>PPT作成</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot empty"></span><span class="star-dot empty"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#f57c00; padding-right:6px;">Slides→変換</td>
+        </tr>
+        <tr class="rec-row">
+          <td>コストパフォーマンス</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#1565c0; padding-right:6px; font-weight:700;">¥680/月 最安</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Microsoft 365 -->
+  <div class="service-detail">
+    <div class="svc-header">
+      <span class="svc-badge ms">Microsoft 365</span>
+    </div>
+    <h3>Microsoft 365 Business Basic</h3>
+    <p class="price">¥750/月（税別）・年払い ¥9,000/年 ・独自ドメインメール含む</p>
+    <table class="star-table" style="width:100%; margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="text-align:left; width:38%;">評価軸</th>
+          <th style="width:34%;">評価</th>
+          <th style="text-align:left; font-size:10px; font-weight:400; color:rgba(255,255,255,0.8); width:28%;">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>iPad/iPhone操作性</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot empty"></span><span class="star-dot empty"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#f57c00; padding-right:6px;">Teamsが重め</td>
+        </tr>
+        <tr>
+          <td>ビデオ会議</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot empty"></span><span class="star-dot empty"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#666; padding-right:6px;">Teams, 相手要アプリ</td>
+        </tr>
+        <tr>
+          <td>メール</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#666; padding-right:6px;">Outlook+独自ドメイン</td>
+        </tr>
+        <tr class="rec-row">
+          <td>PPT作成</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#1565c0; padding-right:6px; font-weight:700;">ネイティブ品質</td>
+        </tr>
+        <tr>
+          <td>コストパフォーマンス</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot empty"></span><span class="star-dot empty"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#666; padding-right:6px;">¥750/月</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Notion -->
+  <div class="service-detail">
+    <div class="svc-header">
+      <span class="svc-badge notion">Notion</span>
+      <span class="tag tag-purple" style="font-size:10px;">補完利用向け</span>
+    </div>
+    <h3>Notion（GWSと組み合わせて使う場合）</h3>
+    <p class="price">個人利用は無料 / Plus: $16/月（¥約2,400）</p>
+    <table class="star-table" style="width:100%; margin-top:8px;">
+      <thead>
+        <tr>
+          <th style="text-align:left; width:38%;">評価軸</th>
+          <th style="width:34%;">評価</th>
+          <th style="text-align:left; font-size:10px; font-weight:400; color:rgba(255,255,255,0.8); width:28%;">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>iPad/iPhone操作性</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#2e7d32; padding-right:6px;">専用アプリ優秀</td>
+        </tr>
+        <tr>
+          <td>ビデオ会議</td>
+          <td style="text-align:center;"><span style="color:#e53935; font-weight:700; font-size:14px;">✕</span></td>
+          <td style="text-align:left; font-size:10px; color:#e53935; padding-right:6px;">機能なし</td>
+        </tr>
+        <tr>
+          <td>メール</td>
+          <td style="text-align:center;"><span style="color:#e53935; font-weight:700; font-size:14px;">✕</span></td>
+          <td style="text-align:left; font-size:10px; color:#e53935; padding-right:6px;">独自ドメイン不可</td>
+        </tr>
+        <tr class="rec-row">
+          <td>ノート・案件管理</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#6a1b9a; padding-right:6px; font-weight:700;">知識管理に最強</td>
+        </tr>
+        <tr>
+          <td>コストパフォーマンス</td>
+          <td><div class="stars"><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span><span class="star-dot"></span></div></td>
+          <td style="text-align:left; font-size:10px; color:#2e7d32; padding-right:6px;">無料から利用可</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box" style="margin-top:12px">
+      <strong>推奨利用法</strong>：Google Workspace でメール・会議を担い、Notion で案件管理・知識蓄積を行う「2ツール構成」が最も効果的です。
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑧ 推奨サービス -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">推奨構成</div>
+  </div>
+
+  <!-- メイン推奨 -->
+  <div class="rec-banner primary" style="margin-bottom:12px;">
+    <p class="rec-label">Primary Recommendation</p>
+    <h3>Google Workspace<br>+ iPad Air 11インチ</h3>
+    <ul class="rec-reasons">
+      <li><span class="check">✓</span> <span>iPad/iPhone主体の業務スタイルに最適化。Safariでほぼ完結</span></li>
+      <li><span class="check">✓</span> <span>Google Meetは相手側のアプリインストール不要。外部クライアントへの配慮◎</span></li>
+      <li><span class="check">✓</span> <span>独自ドメインGmail（例: hiroshi@yourname.jp）でプロフェッショナルな印象</span></li>
+      <li><span class="check">✓</span> <span>月額最安（¥680）で機能は十分</span></li>
+      <li><span class="check">✓</span> <span>PPT作成はGoogle Slides → .pptxエクスポートで対応可能</span></li>
+    </ul>
+  </div>
+
+  <!-- 代替案 -->
+  <div class="rec-banner secondary">
+    <p class="rec-label" style="color:#2e5090;">Alternative — PPT作成が多い場合</p>
+    <h3>Microsoft 365 Business Basic<br>+ iPad Air 11インチ</h3>
+    <ul class="rec-reasons">
+      <li><span class="check">✓</span> <span>PowerPoint作成の頻度が高い場合はMS365が有利</span></li>
+      <li><span class="check">✓</span> <span>Goldman Sachs時代のMSツール操作感をそのまま継続</span></li>
+      <li><span class="check">✓</span> <span>Word/PPT形式の完全互換が重要な場合</span></li>
+    </ul>
+  </div>
+
+  <!-- オプション: Notion追加 -->
+  <div class="card">
+    <p class="card-title">💡 オプション: Notionを補完ツールとして追加</p>
+    <p class="card-body">Google WorkspaceでメールとMeetを担い、Notionでクライアント別のメモ・提言書・案件管理を行う構成。知識管理が体系的になり、複数クライアントを抱えるアドバイザーに向いています。無料プランから始められます。</p>
+  </div>
+
+  <!-- VPN注意 -->
+  <div class="warning-box" style="margin-top:10px;">
+    <p class="warn-title">⚠️ VPN に関する重要な注意</p>
+    <ul>
+      <li>クライアント支給VPNは<strong>iPadOS非対応の場合があります</strong></li>
+      <li>契約前に各クライアントのIT部門へ iOS/iPadOS 対応可否を必ず確認してください</li>
+      <li>Cisco AnyConnect・GlobalProtect 等は iOS 対応版が存在します</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑨ 導入ロードマップ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">導入ロードマップ</div>
+  </div>
+
+  <div class="roadmap">
+    <!-- Step 1 -->
+    <div class="roadmap-item">
+      <div class="roadmap-line">
+        <div class="roadmap-dot">1</div>
+        <div class="roadmap-connector"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase">退職1〜2ヶ月前 / 準備期</p>
+        <h3>ドメイン取得・サービス契約</h3>
+        <ul>
+          <li>独自ドメイン取得（例: hiroshi-ueki.jp）— ¥1,500/年程度</li>
+          <li>Google Workspace Business Starter 契約・ドメイン設定</li>
+          <li>新メールアドレスを親しいクライアントへ先行告知</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="roadmap-item">
+      <div class="roadmap-line">
+        <div class="roadmap-dot">2</div>
+        <div class="roadmap-connector"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase">退職直後 / セットアップ期</p>
+        <h3>デバイス購入・環境構築</h3>
+        <ul>
+          <li>iPad Air 11インチ・Magic Keyboard・Apple Pencil 購入</li>
+          <li>Google Workspace・Gmail をiPadとiPhoneに設定</li>
+          <li>既存の連絡先・カレンダーをGoogleに移行</li>
+          <li>クライアント全員に新メールアドレスを通知</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="roadmap-item">
+      <div class="roadmap-line">
+        <div class="roadmap-dot">3</div>
+        <div class="roadmap-connector"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase">1ヶ月後 / 安定運用</p>
+        <h3>VPN確認・運用最適化</h3>
+        <ul>
+          <li>各クライアントのVPN互換性を確認・設定</li>
+          <li>Google Meet / Zoom / Teams の使い分けを確立</li>
+          <li>Notion 導入（オプション）でクライアント管理を体系化</li>
+          <li>運用上の不明点をサポートで解決</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑩ FAQ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">よくある質問</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">
+      <div class="faq-q-mark">Q</div>
+      <span>今のGoldman Sachsのメールはどうなる？</span>
+    </div>
+    <div class="faq-a">
+      退職後は使用不可になります。早めに独自ドメインを取得し、関係者へ新アドレスを告知しましょう。旧アドレス宛のメールを新アドレスに転送設定できる場合もありますが、IT部門に確認が必要です。
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">
+      <div class="faq-q-mark">Q</div>
+      <span>クライアントに特定のツールを使わせることになる？</span>
+    </div>
+    <div class="faq-a">
+      ありません。Google MeetはURLを共有するだけで、相手はブラウザから参加できます。メールも通常のSMTPで送受信するため、相手のメールソフトを選びません。
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">
+      <div class="faq-q-mark">Q</div>
+      <span>iPadだけでPowerPointは作れる？</span>
+    </div>
+    <div class="faq-a">
+      はい。Google Workspaceの場合、Google SlidesでPPT形式に書き出せます（シンプルなスライドなら品質問題なし）。Microsoft Officeアプリ（PowerPoint for iPad）も無料でインストールでき、基本的な編集が可能です。頻繁に作成する場合はMS365が確実です。
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">
+      <div class="faq-q-mark">Q</div>
+      <span>費用は月いくらかかる？</span>
+    </div>
+    <div class="faq-a">
+      Google Workspace: <strong>¥680/月</strong>（税別）。ドメイン費用（¥125/月換算）を加えても<strong>約¥800〜900/月</strong>が目安です。Notionを追加しても無料プランから始められます。
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">
+      <div class="faq-q-mark">Q</div>
+      <span>VPNが使えない場合はどうすればいい？</span>
+    </div>
+    <div class="faq-a">
+      クライアントのVPNがiPadOS非対応の場合、そのクライアントとの作業のみ別の方法（共有ファイルサーバー、セキュアなメール添付など）で対応することになります。事前に各クライアントのIT担当者へ確認することを強くおすすめします。
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">
+      <div class="faq-q-mark">Q</div>
+      <span>Notionだけでは駄目なの？</span>
+    </div>
+    <div class="faq-a">
+      Notionは独自ドメインのメール送受信ができないため、フリーランスのワークスペースとして単独では不完全です。Google WorkspaceやMS365と組み合わせて、「メール・会議はGWS」「メモ・案件管理はNotion」という役割分担が最も効果的です。
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ⑪ まとめ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">まとめ</div>
+  </div>
+
+  <div class="summary-grid" style="margin-bottom:14px;">
+    <div class="summary-card">
+      <div class="s-icon">📱</div>
+      <p class="s-title">推奨デバイス</p>
+      <p class="s-value">iPad Air 11"<br>+ Magic Keyboard<br>+ Apple Pencil Pro</p>
+    </div>
+    <div class="summary-card">
+      <div class="s-icon">☁️</div>
+      <p class="s-title">推奨サービス</p>
+      <p class="s-value">Google Workspace<br>Business Starter<br>（¥680/月）</p>
+    </div>
+    <div class="summary-card">
+      <div class="s-icon">📝</div>
+      <p class="s-title">補完ツール</p>
+      <p class="s-value">Notion<br>（無料〜）<br>知識管理・案件管理</p>
+    </div>
+    <div class="summary-card">
+      <div class="s-icon">💰</div>
+      <p class="s-title">月額コスト目安</p>
+      <p class="s-value">約¥800〜1,200<br>（GWS+ドメイン<br>±Notion）</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>ポイント</strong>：iPad主体・移動中心の業務スタイルには <strong>Google Workspace が一歩優位</strong>です。PowerPoint作成の頻度が高まった場合は、Microsoft 365 への移行も容易です。まずは Google Workspace から始めることをおすすめします。
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p>本資料は植木博士氏向けに作成された機密資料です。</p>
+  <p style="margin-top:4px">Draft v1.0 — 2026年3月</p>
+</footer>
+
+</body>
+</html>
